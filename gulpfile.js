@@ -14,6 +14,7 @@ var paths = {
   html: "**/*.html",
   js: "js/componentes/**.js",
   vendor: "js/vendor/**.js",
+  utils: "js/utils/**.js",
   sass: "scss/**/*.scss",
   mainSass: "scss/main.scss",
   mainJS: "js/app.js"
@@ -24,6 +25,7 @@ var sources = {
   sass: paths.assets + paths.sass,
   js: config.source+paths.assets+ paths.js,
   vendor: config.source+paths.assets+ paths.vendor,
+  utils: config.source+paths.assets+ paths.utils,
   rootSass: config.source + paths.assets + paths.mainSass,
   rootJS: config.source + paths.assets + paths.mainJS,
 };
@@ -41,7 +43,8 @@ gulp.task('sass', ()=>{
 });
 
 gulp.task('js', ()=>{
-  gulp.src([sources.vendor,sources.js,sources.rootJS])
+  console.log(sources.utils);
+  gulp.src([sources.vendor,sources.utils,sources.js,sources.rootJS])
   .pipe(concat(sources.rootJS))
   .pipe(browserify())
   .pipe(rename("bundle.js"))
@@ -71,5 +74,5 @@ gulp.task("serve", () => {
   });
   gulp.watch(sources.html, ["html-watch"]);
   gulp.watch(sources.sass, ["sass-watch"]);
-  gulp.watch(sources.js, ["js-watch"]);
+  gulp.watch(sources.rootJS, ["js-watch"]);
 });
