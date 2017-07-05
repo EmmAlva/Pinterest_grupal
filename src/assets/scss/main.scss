@@ -11,25 +11,29 @@ header{
     }
 }
 $breakpoints : (xs : 0, sm : 768px, md : 992px, lg : 1200px );
-$cant-column : (xs : 2, sm : 2, md : 3, lg : 5 );
+$cant-column : (xs : 1, sm : 2, md : 3, lg : 5 );
 
 @mixin column($media, $min-width, $count:1){
   @each $name, $count in $cant-column {
     @if $media == $name {
       @media (min-width:$min-width){
         column-count:$count;
-        column-gap: 40px;
+        column-gap: 30px;
       }
     }
   }
 }
 
 .boards{
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
   &__item{
     margin-bottom: 50px;
     display: inline-block;
     &--img{
       border-radius: 10px;
+      width: 220px;
     }
   }
   @each $name, $width in $breakpoints {
