@@ -24,12 +24,18 @@ $cant-column : (xs : 1, sm : 2, md : 3, lg : 5 );
   }
 }
 
-.boards{
+.container-board{
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
+}
+.mg-b{
+  margin-bottom: 50px;
+}
+.boards{
+  @extend .container-board;
   &__item{
-    margin-bottom: 50px;
+    @extend .mg-b;
     display: inline-block;
     &--img{
       border-radius: 10px;
