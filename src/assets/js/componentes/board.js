@@ -1,18 +1,26 @@
 'use strict';
 
-const itemBoard = (board) => {
-  const item = $('<a href ="details.html?id='+id+'" class="item"></a>');
-  const img = $('<img src="'+board.src+'"/>');
-  const title = $('<h5>'+board.title+'</h5>');
-  const description = $('<p>'+board.description+'</p>');
-  const div = $('<div></div>');
-  const foto = $('<img src="'+board.src+'"/>');
-  const user = $('<h5>'+board.title+'</h5>');
-  const name_board = $('<p>'+board.description+'</p>');
-  div.append(foto,user,name_board);
-  item.append(img,title,description,div);
+const Board = (data,update) => {
+  console.log(data.boards);
+  console.log(state.data.foto);
+  const container = $('<div class="container boards"></div>');
+  reRender(container,data.boards,update)
+  return container;
+}
 
+const itemBoard = (board) => {
+  const item = $('<div class="boards__item"></div>');
+  const img = $('<img src="'+board.image.original.url+'"alt="" width="100%">');
+  const div = $('<div class="container-fluid"></div>');
+  const title = $('<h4>at Responsive <br>Website template</h4>');
+  const description = $('<p>'+board.metadata.note+'</p>');
+  const picture = $('<img class="img-circle" src="'+state.data.foto+'" alt="user">');
+  const autor = $('<span class="col-xs-4">Arbale <br>'+state.data.name+'</span>');
+
+  div.append(title,description,picture,autor);
+  item.append(img,div);
   return item;
+
 }
 
 const reRender = (container,arrayBoard,update) => {

@@ -12,12 +12,15 @@ var config = {
 var paths = {
   assets: "/assets/",
   html: "**/*.html",
-  js: "js/componentes/**.js",
+  js: "js/**.js",
+  components: "js/componentes/**.js",
   vendor: "js/vendor/**.js",
   utils: "js/utils/**.js",
   sass: "scss/**/*.scss",
   mainSass: "scss/main.scss",
-  mainJS: "js/app.js"
+  mainJS: "js/app.js",
+  imgPng: "img/*.png"
+
 };
 var sources = {
   assets: config.source + paths.assets,
@@ -25,14 +28,18 @@ var sources = {
   sass: paths.assets + paths.sass,
   js: config.source+paths.assets+ paths.js,
   vendor: config.source+paths.assets+ paths.vendor,
+  components: config.source + paths.assets + paths.components,
   utils: config.source+paths.assets+ paths.utils,
   rootSass: config.source + paths.assets + paths.mainSass,
   rootJS: config.source + paths.assets + paths.mainJS,
+  img: config.source + paths.assets + paths.imgPng,
 };
 gulp.task('html', ()=>{
   gulp.src(sources.html).pipe(gulp.dest(config.dist));
 });
-
+gulp.task('img', ()=>{
+  gulp.src(sources.img).pipe(gulp.dest(config.dist + paths.assets + "img"));
+});
 gulp.task('sass', ()=>{
   console.log(sources.rootSass);
   gulp.src(sources.rootSass)
@@ -43,9 +50,8 @@ gulp.task('sass', ()=>{
 });
 
 gulp.task('js', ()=>{
-  console.log(sources.utils);
-  gulp.src([sources.vendor,sources.utils,sources.js,sources.rootJS])
-  .pipe(concat(sources.rootJS))
+  gulp.src([sources.vendor,sources.utils,sources.components,sources.rootJS])
+  .pipe(concat("new.js"))//temporal no es necsario en un existente
   .pipe(browserify())
   .pipe(rename("bundle.js"))
   .pipe(gulp.dest(config.dist + paths.assets + "js"));
@@ -65,6 +71,11 @@ gulp.task("html-watch", ["html"], function (done) {
   done();
 });
 
+gulp.task("img-watch", ["img"], function (done) {
+  browserSync.reload();
+  done();
+});
+
 gulp.task("serve", () => {
   browserSync.init({
     server: {
@@ -74,5 +85,7 @@ gulp.task("serve", () => {
   });
   gulp.watch(sources.html, ["html-watch"]);
   gulp.watch(sources.sass, ["sass-watch"]);
-  gulp.watch(sources.rootJS, ["js-watch"]);
+  gulp.watch(sources.js, ["js-watch"]);
+  gulp.watch(sources.img, ["img-watch"]);
+
 });

@@ -42,19 +42,27 @@ const getInfo= (user) => {
 
 'use strict';
 
-const itemBoard = (board) => {
-  const item = $('<a href ="details.html?id='+id+'" class="item"></a>');
-  const img = $('<img src="'+board.src+'"/>');
-  const title = $('<h5>'+board.title+'</h5>');
-  const description = $('<p>'+board.description+'</p>');
-  const div = $('<div></div>');
-  const foto = $('<img src="'+board.src+'"/>');
-  const user = $('<h5>'+board.title+'</h5>');
-  const name_board = $('<p>'+board.description+'</p>');
-  div.append(foto,user,name_board);
-  item.append(img,title,description,div);
+const Board = (data,update) => {
+  console.log(data.boards);
+  console.log(state.data.foto);
+  const container = $('<div class="container boards"></div>');
+  reRender(container,data.boards,update)
+  return container;
+}
 
+const itemBoard = (board) => {
+  const item = $('<div class="boards__item"></div>');
+  const img = $('<img src="'+board.image.original.url+'"alt="" width="100%">');
+  const div = $('<div class="container-fluid"></div>');
+  const title = $('<h4>at Responsive <br>Website template</h4>');
+  const description = $('<p>'+board.metadata.note+'</p>');
+  const picture = $('<img class="img-circle" src="'+state.data.foto+'" alt="user">');
+  const autor = $('<span class="col-xs-4">Arbale <br>'+state.data.name+'</span>');
+
+  div.append(title,description,picture,autor);
+  item.append(img,div);
   return item;
+
 }
 
 const reRender = (container,arrayBoard,update) => {
@@ -71,32 +79,58 @@ const reRender = (container,arrayBoard,update) => {
 'use strict';
 
 const Header = (data,update) => {
-  console.log(data);
-  const h = $('<header><div class="container"><h1>pinterest</h1></div></header>');
-  return h;
+  //console.log(data);
+
+
+  const header = $('<header></header>');
+  const container = $('<div class="container"></div>');
+  const row0 = $('<div class = "row"></div>');
+
+  const row = $('<div class = "row"></div>');
+  const col = $('<div class="col-lg-6 col-lg-offset-3"></div>');
+  const col1_6 = $('<div class="col-lg-6"></div>');
+  const boardName = $('<h2 class="text-bold">'+data.name+'</h2>');
+  const pins = $('<p><strong>'+data.pins+'</strong> Pines</p>');
+  const followers = $('<p><strong>'+data.followers+'</strong> sSeguidores</p>');
+  const col2_6 = $('<div class="col-lg-6"></div>');
+  const picture = $('<img class="img-circle pull-right" src="'+data.foto+'" alt="user">');
+
+  header.append(container);
+  container.append(row);
+  row.append(col);
+  col.append(boardName);
+  col.append(col1_6);
+  col.append(col2_6);
+  col1_6.append(pins);
+  col1_6.append(followers);
+  col2_6.append(picture);
+
+  return header;
 }
 
 'use strict';
 
 const Modal = (itemSelect,data,update) => {
-  const container = $('<div><div class="container"><h1>Cine laboratoria</h1></div></div>');
-  const modal = $('<div class="container"><h1>Cine laboratoria</h1></div>');
+  const container = $('<div class="container"><h1>Cine laboratoria</h1></div></div>');
+  const modal = $('<div class="container"><h1>Cine laboratoria A</h1></div>');
   const grid = $('<div><div class="container"><h1>Cine laboratoria</h1></div></div>');
   container.append(modal,render(grid,data,update));
   return container;
+  
 }
 
 'use strict';
 
 const render = (root,data) => {
   root.empty();
+  console.log(data);
   const wrapper = $('<div class="wrapper"></div>');
   if(state.page == "main"){
     wrapper.append(Header(data,_=>{ render(root) }));
-    // wrapper.append(Board(data,_=>{ render(root) }));
-  }else{
     wrapper.append(Board(data,_=>{ render(root) }));
+  }else{
 
+    wrapper.append(Board(data,_=>{ render(root) }));
   }
   root.append(wrapper);
 }
@@ -108,23 +142,23 @@ const state = {
 };
 $( _ => {
   const root = $("#root");
-
   state.user = 'arabelyuska';
   getUser(state.user).then((response) => {
        if(response.data == null){
-         console.log("Error al obtener data");
+         console.log("Error al obtener data del usuario");
        }else {
          state.data.foto = response.data.image['60x60'].url;
          getInfo(state.user).then((response) => {
+           //console.log(response,source);
            state.data.pins = response.data.counts.pins;
            state.data.followers = response.data.counts.followers;
            state.data.name = response.data.name;
           });
         getBoards(state.user).then((response) => {
           state.data.boards = response.data;
-          // console.log(response.data[1].image.original.url);
+            render(root,state.data);
          });
-         render(root,state.data);
+
        }
      });
 });
