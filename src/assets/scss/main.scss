@@ -2,6 +2,14 @@
 body{
 
 }
+.text-bold{
+  font-weight: bold;
+}
+header{
+    .row{
+      margin-top: 15px;
+    }
+}
 $breakpoints : (xs : 0, sm : 768px, md : 992px, lg : 1200px );
 $cant-column : (xs : 2, sm : 2, md : 3, lg : 5 );
 
@@ -20,7 +28,7 @@ $cant-column : (xs : 2, sm : 2, md : 3, lg : 5 );
   &__item{
     margin-bottom: 50px;
     display: inline-block;
-    img{
+    &--img{
       border-radius: 10px;
     }
   }
