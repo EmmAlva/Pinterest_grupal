@@ -8,7 +8,7 @@ const render = (root,data) => {
     wrapper.append(Header(data,_=>{ render(root) }));
     wrapper.append(Board(data,_=>{ render(root) }));
   }else{
-
+    // wrapper.append(Modal(data,_=>{ render(root) }));
     wrapper.append(Board(data,_=>{ render(root) }));
   }
   root.append(wrapper);
@@ -40,4 +40,5 @@ $( _ => {
 
        }
      });
+     $('#myModal').modal('toggle');
 });

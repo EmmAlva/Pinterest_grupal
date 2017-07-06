@@ -1,4 +1,4 @@
-@import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 body{
 
 }
@@ -32,6 +32,23 @@ $cant-column : (xs : 1, sm : 2, md : 3, lg : 5 );
 .mg-b{
   margin-bottom: 50px;
 }
+.fade.in {
+  background-color: rgba(238,238,238,1);
+}
+.modal{
+  .modal-content{
+    box-shadow: none;
+    border: 0;
+    padding: 30px;
+    &--img{
+      border-radius: 10px;
+    }
+  }
+  &--close{
+    margin: 45px;
+    font-size: 4rem;
+  }
+}
 .boards{
   @extend .container-board;
   &__item{
@@ -40,6 +57,9 @@ $cant-column : (xs : 1, sm : 2, md : 3, lg : 5 );
     &--img{
       border-radius: 10px;
       width: 220px;
+    }
+    &:hover{
+      cursor: -webkit-zoom-in;
     }
   }
   @each $name, $width in $breakpoints {

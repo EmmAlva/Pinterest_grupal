@@ -12,7 +12,7 @@ var config = {
 var paths = {
   assets: "/assets/",
   html: "**/*.html",
-  js: "js/**.js",
+  js: "js/**/*.js",
   components: "js/componentes/**.js",
   vendor: "js/vendor/**.js",
   utils: "js/utils/**.js",
