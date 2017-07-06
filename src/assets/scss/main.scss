@@ -1,5 +1,68 @@
-@import "../../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 body{
-  background: pink;
-  color: red;
+
+}
+.text-bold{
+  font-weight: bold;
+}
+header{
+    .row{
+      margin-top: 15px;
+    }
+}
+$breakpoints : (xs : 0, sm : 768px, md : 992px, lg : 1200px );
+$cant-column : (xs : 1, sm : 2, md : 3, lg : 5 );
+
+@mixin column($media, $min-width, $count:1){
+  @each $name, $count in $cant-column {
+    @if $media == $name {
+      @media (min-width:$min-width){
+        column-count:$count;
+        column-gap: 30px;
+      }
+    }
+  }
+}
+
+.container-board{
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+.mg-b{
+  margin-bottom: 50px;
+}
+.fade.in {
+  background-color: rgba(238,238,238,1);
+}
+.modal{
+  .modal-content{
+    box-shadow: none;
+    border: 0;
+    padding: 30px;
+    &--img{
+      border-radius: 10px;
+    }
+  }
+  &--close{
+    margin: 45px;
+    font-size: 4rem;
+  }
+}
+.boards{
+  @extend .container-board;
+  &__item{
+    @extend .mg-b;
+    display: inline-block;
+    &--img{
+      border-radius: 10px;
+      width: 220px;
+    }
+    &:hover{
+      cursor: -webkit-zoom-in;
+    }
+  }
+  @each $name, $width in $breakpoints {
+    @include column($name, $width);
+  }
 }
