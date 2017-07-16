@@ -28,6 +28,32 @@ $cant-column : (xs : 1, sm : 2, md : 3, lg : 5 );
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
+  section{
+    z-index: 200;
+    background: #fff;
+    position: fixed;
+    top: 0;
+
+    .row{
+      padding: 10px 50px;
+    }
+  }
+
+  .container{
+    margin-top: 90px;
+  }
+}
+
+.header-one{
+  border-bottom: 1px solid rgba(108, 108, 108,0.2);
+}
+
+.head-two{
+  
+}
+
+.m-0{
+  margin: 0 !important;
 }
 .mg-b{
   margin-bottom: 50px;
