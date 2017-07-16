@@ -18,9 +18,14 @@
 <li>Componentes</li>
 </ul>
 
-<p>Es importante rescatar que para poder tener acceso al API de Pinterest fue necesario crear un app en <i>Developers Pinterest</i> para que nos proporcionen un <strong>token</strong> y podamos usar los enpoints que nos proporciona. Se probaron los endpoints de board en el <u>API Explorer</u> (https://developers.pinterest.com/tools/api-explorer/?)</p> 
+<p>Es importante rescatar que para poder tener acceso al API de Pinterest fue necesario crear un app en <i>Developers Pinterest</i> para que nos proporcionen un <strong>token</strong> y podamos usar los enpoints que nos proporciona. Se probaron los endpoints de board en el <u>API Explorer</u> (https://developers.pinterest.com/tools/api-explorer/?)</p>
 
-*El proyecto esta publicado en heroku*
+<p><i>*El proyecto esta publicado en heroku</i></p>
 <span>link: http://pinterest-lab.herokuapp.com/</span>
-*El proyecto denota el uso de tareas automatizadas en su desarrollo*
+<p><i>*El proyecto denota el uso de tareas automatizadas en su desarrollo</i></p>
 <span>uso de gulp/task runner</span>
+
+
+
+
+<span>Presentación del proyecto: https://docs.google.com/presentation/d/1XGYZcZonW7SeJDuLaIvhMnUBRj5YqgbTbpXHErEJp18/edit?usp=sharing</span> 
